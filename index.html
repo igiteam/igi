@@ -76,20 +76,6 @@
     .span-left { grid-column: 1 / 4; }
     .span-right { grid-column: 4 / 7; }
 
-    /* Arrow styles */
-    .arrow-down {
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        margin: 5px 0;
-    }
-
-    .arrow-right {
-        text-align: right;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
     /* The engine bracket */
     .engine-bracket {
         border-top: 2px solid #000;
@@ -175,6 +161,12 @@
         gap: 15px;
         justify-content: center;
     }
+    
+    /* Spacing for magazine links */
+    .magazine-links a {
+        display: inline-block;
+        margin: 0 5px 10px 5px;
+    }
 </style>
 </head>
 <body>
@@ -231,29 +223,35 @@
         </div>
     </div>
 
+    <!-- MAGAZINE LINKS ROW (Fixed) -->
     <div class="grid-row">
-        <a href="https://ps1magazines.macosxjs.com" target="_blank">ps1magazines</a>
-        <a href="https://dreamcastmagazines.macosxjs.com" target="_blank">dreamcastmagazines</a>
-        <a href="https://n64magazines.macosxjs.com" target="_blank">n64magazines</a>
-        <a href="https://xboxmagazines.macosxjs.com" target="_blank">xboxmagazines</a>
-        <a href="https://ps2magazines.macosxjs.com" target="_blank">ps2magazines</a>
-        <a href="https://gamecubemagazines.macosxjs.com" target="_blank">gamecubemagazines</a>
-        <a href="https://wiimagazines.macosxjs.com" target="_blank">wiimagazines</a>
-        <a href="https://ps3magazines.macosxjs.com" target="_blank">ps3magazines</a>
-        <a href="https://xbox360magazines.macosxjs.com" target="_blank">xbox360magazines</a>
-        <a href="https://pspmagazines.macosxjs.com" target="_blank">pspmagazines</a>
-        <a href="https://gbamagazines.macosxjs.com" target="_blank">gbamagazines</a>
-        <a href="https://3domagazines.macosxjs.com" target="_blank">3domagazines</a>
-        <a href="https://segasaturnmagazines.macosxjs.com" target="_blank">segasaturnmagazines</a>
-        <a href="https://snesmagazines.macosxjs.com" target="_blank">snesmagazines</a>
-        <a href="https://segagenesismagazines.macosxjs.com" target="_blank">segagenesismagazines</a>
-        <a href="https://pczonemagazines.macosxjs.com" target="_blank">pczonemagazines</a>
-     <div class="grid-row">
-       <div class="span-center">
+        <div class="span-full magazine-links">
+            <a href="https://ps1magazines.macosxjs.com" target="_blank">ps1magazines</a>
+            <a href="https://dreamcastmagazines.macosxjs.com" target="_blank">dreamcastmagazines</a>
+            <a href="https://n64magazines.macosxjs.com" target="_blank">n64magazines</a>
+            <a href="https://xboxmagazines.macosxjs.com" target="_blank">xboxmagazines</a>
+            <a href="https://ps2magazines.macosxjs.com" target="_blank">ps2magazines</a>
+            <a href="https://gamecubemagazines.macosxjs.com" target="_blank">gamecubemagazines</a>
+            <a href="https://wiimagazines.macosxjs.com" target="_blank">wiimagazines</a>
+            <a href="https://ps3magazines.macosxjs.com" target="_blank">ps3magazines</a>
+            <a href="https://xbox360magazines.macosxjs.com" target="_blank">xbox360magazines</a>
+            <a href="https://pspmagazines.macosxjs.com" target="_blank">pspmagazines</a>
+            <a href="https://gbamagazines.macosxjs.com" target="_blank">gbamagazines</a>
+            <a href="https://3domagazines.macosxjs.com" target="_blank">3domagazines</a>
+            <a href="https://segasaturnmagazines.macosxjs.com" target="_blank">segasaturnmagazines</a>
+            <a href="https://snesmagazines.macosxjs.com" target="_blank">snesmagazines</a>
+            <a href="https://segagenesismagazines.macosxjs.com" target="_blank">segagenesismagazines</a>
+            <a href="https://pczonemagazines.macosxjs.com" target="_blank">pczonemagazines</a>
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="span-center">
             <a href="https://xboxmagazines.macosxjs.com" target="_blank">xboxmagazines</a><br>
             <a href="https://igiteam.github.io" target="_blank">igiteam.github.io</a>
         </div>
-     </div>
+    </div>
+
     <!-- MIDDLE SECTION: Engine Bracket -->
     <div class="grid-row">
         <div class="span-full">
@@ -341,9 +339,8 @@
                         <br>
                         <a href="https://remove.bg" target="_blank">remove.bg</a><br>
                         <a href="https://pixlr.com" target="_blank">pixlr.com</a><br>
-                        <a href="https://firecrawl.dev/tools/website-to-markdown" target="_blank">firecrawl.dev/tools/website-to-markdown</a>
+                        <a href="https://firecrawl.dev/tools/website-to-markdown" target="_blank">firecrawl.dev/tools/website-to-markdown</a><br>
                         <a href="https://crayon.com" target="_blank">crayon.com</a>
-
                     </div>
                 </div>
 
@@ -369,7 +366,6 @@
     </div>
 
     <hr>
-
 
 </div>
 

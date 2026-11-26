@@ -7,6 +7,8 @@
 <style>
     * { box-sizing: border-box; }
 
+    html, body { overflow-x: hidden; }
+
     body {
         font-family: monospace;
         background: #fff;
@@ -54,6 +56,7 @@
 
     .console-table td { width: 16.666%; }
     .magazine-table td { width: 16.666%; }
+
     .engine-bracket {
         border-top: 2px solid #000;
         border-left: 2px solid #000;
@@ -107,6 +110,7 @@
         padding: 2px 5px;
         text-align: left;
         vertical-align: top;
+        overflow-wrap: break-word;
     }
 
     .list-table .arrow { width: 18px; white-space: nowrap; }
@@ -170,28 +174,46 @@
             max-width: 100%;
         }
 
-        /* Wide link tables scroll horizontally instead of crushing text */
-        .console-table,
-        .magazine-table { min-width: 1100px; }
+        /* Kill the horizontal scroller entirely */
+        .dashboard > tbody > tr > td { overflow-x: visible; }
 
-        .dashboard > tbody > tr > td { overflow-x: auto; }
-
+        /* Turn the 16-col link tables into a wrapping grid */
         .console-table,
         .magazine-table,
-        .engine-table { table-layout: auto; }
+        .engine-table {
+            table-layout: auto;
+            display: block;
+            width: 100%;
+            min-width: 0;
+        }
+        .console-table tbody,
+        .magazine-table tbody,
+        .engine-table tbody { display: block; width: 100%; }
+
+        .console-table tr,
+        .magazine-table tr,
+        .engine-table tr {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         .console-table td,
         .magazine-table td,
         .engine-table td {
-            padding: 4px 2px;
+            display: block;
+            width: auto !important;
+            flex: 0 0 auto;
+            padding: 4px 6px;
             overflow-wrap: anywhere;
+            text-align: center;
         }
 
         .content-cell { padding-left: 8px !important; }
 
         .section-table > tbody > tr > td { padding: 6px; }
 
-        /* Stack the two side-by-side sections vertically */
+        /* Stack the two side-by-side sections */
         .section-table,
         .section-table > tbody,
         .section-table > tbody > tr,
@@ -215,13 +237,12 @@
             white-space: normal;
         }
 
-        /* Keep the tree pipes narrow but stop them eating the row */
         .list-table td:first-child {
             width: 12px;
             padding-right: 2px;
         }
 
-        /* Workflow block: full width, no giant indent */
+        /* Workflow: full width, no giant indent */
         .workflow {
             display: block;
             margin-left: 10px;
@@ -292,19 +313,14 @@
         </td>
     </tr>
 
-    <!-- EMPTY SPACER ROW -->
-    <tr class="spacer-row">
-        <td colspan="2">&nbsp;</td>
-    </tr>
+    <tr class="spacer-row"><td colspan="2">&nbsp;</td></tr>
 
-    <!-- CENTERED MACOSXJS -->
     <tr>
         <td colspan="2" class="center">
             <a href="https://macosxjs.com" target="_blank" rel="noopener">macosxjs.com</a>
         </td>
     </tr>
 
-    <!-- EMPTY SPACER ROW WITH DOWN ARROW IN THE CENTER -->
     <tr class="spacer-row">
         <td colspan="2" class="center">↓</td>
     </tr>
@@ -337,12 +353,8 @@
         </td>
     </tr>
 
-    <!-- EMPTY SPACER ROW -->
-    <tr class="spacer-row">
-        <td colspan="2">&nbsp;</td>
-    </tr>
+    <tr class="spacer-row"><td colspan="2">&nbsp;</td></tr>
 
-    <!-- CENTERED IGITEAM GITHUB -->
     <tr>
         <td colspan="2" class="center">
             <a href="https://igiteam.github.io" target="_blank" rel="noopener">igiteam.github.io</a>
@@ -467,7 +479,6 @@
                                     <tr><td><a href="https://imagetobase64.macosxjs.com" target="_blank" rel="noopener">imagetobase64.macosxjs.com</a></td></tr>
                                     <tr><td><a href="https://readme.macosxjs.com/?url=https%3A%2F%2Fgithub.com%2Figiteam%2Fwinejs%2Fblob%2Fmain%2FREADME.md" target="_blank" rel="noopener">winejs.org</a></td></tr>
                                     <tr><td>&nbsp;</td></tr>
-                                   
                                     <tr><td><a href="https://remove.bg" target="_blank" rel="noopener">remove.bg</a></td></tr>
                                     <tr><td><a href="https://pixlr.com" target="_blank" rel="noopener">pixlr.com</a></td></tr>
                                     <tr><td><a href="https://firecrawl.dev/tools/website-to-markdown" target="_blank" rel="noopener">firecrawl.dev/tools/website-to-markdown</a></td></tr>
@@ -480,10 +491,7 @@
 
                         <td class="left">
                             <div class="left">
-                                 <br>
-                                 <br>
-                                 <br>
-                                 <br>
+                                <br><br><br><br>
                                 ( 8xH200 deepseekV3 )<br>
                                 ( image / video / texture generation )<br>
                                 ( astral video upscaler )

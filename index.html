@@ -5,78 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IGI Team - Architecture Map</title>
 <style>
-    /* Pure ink on paper. No styling, just structure. */
+    * { box-sizing: border-box; }
+
     body {
         font-family: monospace;
-        background-color: #ffffff;
-        color: #000000;
+        background: #fff;
+        color: #000;
         margin: 20px;
         padding: 0;
         line-height: 1.6;
         font-size: 14px;
     }
-    
-    a {
-        color: #000000;
-        text-decoration: underline;
-    }
 
-    a:hover {
-        text-decoration: none;
-        background-color: #000;
-        color: #fff;
-    }
+    a { color: #000; text-decoration: underline; }
+    a:hover { text-decoration: none; background: #000; color: #fff; }
 
-    /* The layout grid */
     .dashboard {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
         max-width: 1200px;
+        border-collapse: collapse;
+        table-layout: fixed;
     }
 
-    /* The left spine */
-    .main-spine {
-        display: flex;
-    }
-
-    .spine-line {
-        width: 40px;
-        border-left: 2px solid #000;
-        border-bottom: 2px solid #000;
-        border-bottom-left-radius: 10px;
-        margin-bottom: 20px;
-        position: relative;
-    }
-    
-    .spine-line::after {
-        content: "→";
-        position: absolute;
-        bottom: -12px;
-        left: -7px;
-        font-size: 16px;
-        background: #fff;
-    }
-
-    .content-area {
-        flex: 1;
-        padding-left: 20px;
-    }
-
-    /* Grid areas for alignment */
-    .grid-row {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 10px;
-        margin-bottom: 20px;
+    .dashboard > tbody > tr > td {
+        padding: 10px;
+        vertical-align: top;
         text-align: center;
     }
 
-    .span-full { grid-column: 1 / -1; }
-    .span-center { grid-column: 2 / 6; }
-    .span-left { grid-column: 1 / 4; }
-    .span-right { grid-column: 4 / 7; }
+    .dashboard .left { text-align: left; }
+    .dashboard .right { text-align: right; }
+    .dashboard .center { text-align: center; }
+    .dashboard .third { width: 50%; }
+    .dashboard .full { width: 100%; }
 
-    /* The engine bracket */
+    .link-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .link-table td {
+        padding: 5px;
+        vertical-align: top;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    .console-table td { width: 16.666%; }
+    .magazine-table td { width: 16.666%; }
     .engine-bracket {
         border-top: 2px solid #000;
         border-left: 2px solid #000;
@@ -96,56 +73,80 @@
         font-weight: bold;
     }
 
-    /* Structural tables for text */
-    .pure-table {
-        width: 100%;
-        text-align: center;
-        border-collapse: collapse;
+    .engine-table td { width: 12.5%; }
+
+    .spine {
+        width: 40px;
+        min-width: 40px;
+        border-left: 2px solid #000;
+        border-bottom: 2px solid #000;
+        border-bottom-left-radius: 10px;
+        position: relative;
     }
 
-    .pure-table td {
-        padding: 5px;
+    .spine::after {
+        content: "→";
+        position: absolute;
+        bottom: -12px;
+        left: -7px;
+        font-size: 16px;
+        background: #fff;
+    }
+
+    .content-cell { padding-left: 20px !important; }
+
+    .section-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .section-table > tbody > tr > td {
+        width: 50%;
+        padding: 10px;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .list-table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .list-table td {
+        padding: 2px 5px;
+        text-align: left;
         vertical-align: top;
     }
 
-    .list-left {
-        text-align: left;
-        display: inline-block;
-    }
+    .list-table .arrow { width: 18px; white-space: nowrap; }
 
-    /* Right side workflow brackets */
-    .workflow-list {
+    .workflow {
+        display: inline-block;
         text-align: left;
         border-left: 2px solid #000;
         padding-left: 10px;
         margin-left: 20px;
-        display: inline-block;
     }
 
-    .workflow-list div {
+    .workflow td {
         position: relative;
+        padding: 2px 0;
     }
 
-    .workflow-list div::before {
+    .workflow td::before {
         content: "—";
         position: absolute;
         left: -20px;
         top: 0;
     }
 
-    hr {
-        border: 0;
-        border-bottom: 1px dashed #000;
-        margin: 30px 0;
-    }
-    
-    /* New blocks for the lists */
     .category-block {
         margin-top: 30px;
         border: 2px solid #000;
         padding: 15px;
     }
-    
+
     .category-title {
         font-weight: bold;
         text-align: center;
@@ -154,215 +155,272 @@
         border-bottom: 1px solid #000;
         padding-bottom: 5px;
     }
-    
-    .link-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
+
+    .separator {
+        border: 0;
+        border-bottom: 1px dashed #000;
+        margin: 30px 0;
     }
-    
-    /* Spacing for magazine links */
-    .magazine-links a {
-        display: inline-block;
-        margin: 0 5px 10px 5px;
+
+    .down-arrow {
+        height: 60px;
+        text-align: center;
+        font-size: 30px;
+        vertical-align: middle !important;
+    }
+
+    @media (max-width: 700px) {\n        .console-table, .magazine-table { min-width: 1100px; }\n        .dashboard > tbody > tr > td { overflow-x: auto; }
+        body { margin: 10px; font-size: 12px; }
+        .dashboard, .dashboard tbody, .dashboard tr, .dashboard td {
+            max-width: 100%;
+        }
+        .console-table, .magazine-table, .engine-table { table-layout: auto; }
+        .console-table td, .magazine-table td, .engine-table td {
+            padding: 4px 2px;
+            overflow-wrap: anywhere;
+        }
+        .content-cell { padding-left: 8px !important; }
+        .section-table > tbody > tr > td { padding: 6px; }
     }
 </style>
 </head>
 <body>
 
-<div class="dashboard">
+<table class="dashboard">
+<tbody>
 
-    <!-- TOP SECTION: Sources & Platforms -->
-    <div class="grid-row">
-        <div class="span-left">
-            <a href="https://igiteam.github.io" target="_blank">github.com/igiteam</a>
-        </div>
-        <div class="span-right">
-            <a href="https://archive.org/details/@projectigi_team" target="_blank">archive.org/details/igiteam_uploads</a>
-        </div>
-    </div>
+    <!-- TOP: SOURCE PLATFORMS -->
+    <tr>
+        <td class="left third">
+            <a href="https://igiteam.github.io" target="_blank" rel="noopener">github.com/igiteam</a>
+        </td>
+        <td class="right third">
+            <a href="https://archive.org/details/@projectigi_team" target="_blank" rel="noopener">archive.org/details/igiteam_uploads</a>
+        </td>
+    </tr>
 
-    <!-- Console Links -->
-    <div class="grid-row">
-        <div class="span-full">
-            <a href="https://ps1games.macosxjs.com" target="_blank">PS1</a>
-            <a href="https://dreamcastgames.macosxjs.com" target="_blank">Dreamcast</a>
-            <a href="https://n64games.macosxjs.com" target="_blank">N64</a>
-            <a href="https://xboxgames.macosxjs.com" target="_blank">Xbox</a>
-            <a href="https://ps2games.macosxjs.com" target="_blank">PS2</a>
-            <a href="https://gamecubegames.macosxjs.com" target="_blank">GameCube</a>
-            <a href="https://wiigames.macosxjs.com" target="_blank">Wii</a>
-            <a href="https://ps3games.macosxjs.com" target="_blank">PS3</a>
-            <a href="https://xbox360games.macosxjs.com" target="_blank">Xbox 360</a>
-            <a href="https://pspgames.macosxjs.com" target="_blank">PSP</a>
-            <a href="https://gbagames.macosxjs.com" target="_blank">GBA</a>
-            <a href="https://3dogames.macosxjs.com" target="_blank">3DO</a>
-            <a href="https://segasaturngames.macosxjs.com" target="_blank">Sega Saturn</a>
-            <a href="https://snesgames.macosxjs.com" target="_blank">SNES</a>
-            <a href="https://segagenesisgames.macosxjs.com" target="_blank">Sega Genesis</a>
-            <div style="display: flex; align-items: center; gap: 8px;"><a href="https://pcgames.macosxjs.com" target="_blank">PC</a> ← <a href="https://www.mobygames.com" target="_blank">mobygames.com</a></div>        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="span-center">
-            <a href="https://macosxjs.com" target="_blank">macosxjs.com</a>
-        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="span-center">
-            ↓
-        </div>
-        <div class="span-right">
-            ↓ pc
-        </div>
-    </div>
-
-    <!-- MAGAZINE LINKS ROW (Fixed) -->
-    <div class="grid-row">
-        <div class="span-full magazine-links">
-            <a href="https://ps1magazines.macosxjs.com" target="_blank">ps1magazines</a>
-            <a href="https://dreamcastmagazines.macosxjs.com" target="_blank">dreamcastmagazines</a>
-            <a href="https://n64magazines.macosxjs.com" target="_blank">n64magazines</a>
-            <a href="https://xboxmagazines.macosxjs.com" target="_blank">xboxmagazines</a>
-            <a href="https://ps2magazines.macosxjs.com" target="_blank">ps2magazines</a>
-            <a href="https://gamecubemagazines.macosxjs.com" target="_blank">gamecubemagazines</a>
-            <a href="https://wiimagazines.macosxjs.com" target="_blank">wiimagazines</a>
-            <a href="https://ps3magazines.macosxjs.com" target="_blank">ps3magazines</a>
-            <a href="https://xbox360magazines.macosxjs.com" target="_blank">xbox360magazines</a>
-            <a href="https://pspmagazines.macosxjs.com" target="_blank">pspmagazines</a>
-            <a href="https://gbamagazines.macosxjs.com" target="_blank">gbamagazines</a>
-            <a href="https://3domagazines.macosxjs.com" target="_blank">3domagazines</a>
-            <a href="https://segasaturnmagazines.macosxjs.com" target="_blank">segasaturnmagazines</a>
-            <a href="https://snesmagazines.macosxjs.com" target="_blank">snesmagazines</a>
-            <a href="https://segagenesismagazines.macosxjs.com" target="_blank">segagenesismagazines</a>
-            <a href="https://pczonemagazines.macosxjs.com" target="_blank">pczonemagazines</a>
-        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="span-center">
-            <a href="https://igiteam.github.io" target="_blank">igiteam.github.io</a>
-        </div>
-    </div>
-
-    <!-- MIDDLE SECTION: Engine Bracket -->
-    <div class="grid-row">
-        <div class="span-full">
-            <div class="engine-bracket">
-                <table class="pure-table">
+    <!-- 16-COLUMN GAME LINKS -->
+    <tr>
+        <td colspan="2">
+            <table class="link-table console-table">
+                <tbody>
                     <tr>
-                        <td><a href="https://idtechenginegames.macosxjs.com" target="_blank">idtechenginegames</a></td>
-                        <td><a href="https://gamebryoenginegames.macosxjs.com" target="_blank">gamebryoenginegames</a></td>
-                        <td><a href="https://unrealenginegames.macosxjs.com" target="_blank">unrealenginegames</a></td>
-                        <td><a href="https://chromeenginegames.macosxjs.com" target="_blank">chromeenginegames</a></td>
-                        <td><a href="https://lithtechenginegames.macosxjs.com" target="_blank">lithtechenginegames</a></td>
-                        <td><a href="https://renderwareenginegames.macosxjs.com" target="_blank">renderwareenginegames</a></td>
-                        <td><a href="https://videogameslibrary.macosxjs.com" target="_blank">Video Games Library</a></td>
-                        <td><a href="https://ue3.macosxjs.com/" target="_blank">UE3</a></td>
+                        <td><a href="https://ps1games.macosxjs.com" target="_blank" rel="noopener">PS1</a></td>
+                        <td><a href="https://dreamcastgames.macosxjs.com" target="_blank" rel="noopener">Dreamcast</a></td>
+                        <td><a href="https://n64games.macosxjs.com" target="_blank" rel="noopener">N64</a></td>
+                        <td><a href="https://xboxgames.macosxjs.com" target="_blank" rel="noopener">Xbox</a></td>
+                        <td><a href="https://ps2games.macosxjs.com" target="_blank" rel="noopener">PS2</a></td>
+                        <td><a href="https://gamecubegames.macosxjs.com" target="_blank" rel="noopener">GameCube</a></td>
+                        <td><a href="https://wiigames.macosxjs.com" target="_blank" rel="noopener">Wii</a></td>
+                        <td><a href="https://ps3games.macosxjs.com" target="_blank" rel="noopener">PS3</a></td>
+                        <td><a href="https://xbox360games.macosxjs.com" target="_blank" rel="noopener">Xbox 360</a></td>
+                        <td><a href="https://pspgames.macosxjs.com" target="_blank" rel="noopener">PSP</a></td>
+                        <td><a href="https://gbagames.macosxjs.com" target="_blank" rel="noopener">GBA</a></td>
+                        <td><a href="https://3dogames.macosxjs.com" target="_blank" rel="noopener">3DO</a></td>
+                        <td><a href="https://segasaturngames.macosxjs.com" target="_blank" rel="noopener">Sega Saturn</a></td>
+                        <td><a href="https://snesgames.macosxjs.com" target="_blank" rel="noopener">SNES</a></td>
+                        <td><a href="https://segagenesisgames.macosxjs.com" target="_blank" rel="noopener">Sega Genesis</a></td>
+                        <td>
+                            <a href="https://pcgames.macosxjs.com" target="_blank" rel="noopener">PC</a>
+                            ←
+                            <a href="https://www.mobygames.com" target="_blank" rel="noopener">mobygames.com</a>
+                        </td>
                     </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+    <!-- EMPTY SPACER ROW -->
+    <tr class="spacer-row">
+        <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <!-- CENTERED MACOSXJS -->
+    <tr>
+        <td colspan="2" class="center">
+            <a href="https://macosxjs.com" target="_blank" rel="noopener">macosxjs.com</a>
+        </td>
+    </tr>
+
+    <!-- EMPTY SPACER ROW WITH DOWN ARROW IN THE CENTER -->
+    <tr class="spacer-row">
+        <td colspan="2" class="center">↓</td>
+    </tr>
+
+    <!-- 16-COLUMN MAGAZINE LINKS -->
+    <tr>
+        <td colspan="2">
+            <table class="link-table magazine-table">
+                <tbody>
+                    <tr>
+                        <td><a href="https://ps1magazines.macosxjs.com" target="_blank" rel="noopener">ps1magazines</a></td>
+                        <td><a href="https://dreamcastmagazines.macosxjs.com" target="_blank" rel="noopener">dreamcastmagazines</a></td>
+                        <td><a href="https://n64magazines.macosxjs.com" target="_blank" rel="noopener">n64magazines</a></td>
+                        <td><a href="https://xboxmagazines.macosxjs.com" target="_blank" rel="noopener">xboxmagazines</a></td>
+                        <td><a href="https://ps2magazines.macosxjs.com" target="_blank" rel="noopener">ps2magazines</a></td>
+                        <td><a href="https://gamecubemagazines.macosxjs.com" target="_blank" rel="noopener">gamecubemagazines</a></td>
+                        <td><a href="https://wiimagazines.macosxjs.com" target="_blank" rel="noopener">wiimagazines</a></td>
+                        <td><a href="https://ps3magazines.macosxjs.com" target="_blank" rel="noopener">ps3magazines</a></td>
+                        <td><a href="https://xbox360magazines.macosxjs.com" target="_blank" rel="noopener">xbox360magazines</a></td>
+                        <td><a href="https://pspmagazines.macosxjs.com" target="_blank" rel="noopener">pspmagazines</a></td>
+                        <td><a href="https://gbamagazines.macosxjs.com" target="_blank" rel="noopener">gbamagazines</a></td>
+                        <td><a href="https://3domagazines.macosxjs.com" target="_blank" rel="noopener">3domagazines</a></td>
+                        <td><a href="https://segasaturnmagazines.macosxjs.com" target="_blank" rel="noopener">segasaturnmagazines</a></td>
+                        <td><a href="https://snesmagazines.macosxjs.com" target="_blank" rel="noopener">snesmagazines</a></td>
+                        <td><a href="https://segagenesismagazines.macosxjs.com" target="_blank" rel="noopener">segagenesismagazines</a></td>
+                        <td><a href="https://pczonemagazines.macosxjs.com" target="_blank" rel="noopener">pczonemagazines</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+    <!-- EMPTY SPACER ROW -->
+    <tr class="spacer-row">
+        <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <!-- CENTERED IGITEAM GITHUB -->
+    <tr>
+        <td colspan="2" class="center">
+            <a href="https://igiteam.github.io" target="_blank" rel="noopener">igiteam.github.io</a>
+        </td>
+    </tr>
+
+    <!-- ENGINE BRACKET -->
+    <tr>
+        <td colspan="2">
+            <div class="engine-bracket">
+                <table class="link-table engine-table">
+                    <tbody>
+                        <tr>
+                            <td><a href="https://idtechenginegames.macosxjs.com" target="_blank" rel="noopener">idtechenginegames</a></td>
+                            <td><a href="https://gamebryoenginegames.macosxjs.com" target="_blank" rel="noopener">gamebryoenginegames</a></td>
+                            <td><a href="https://unrealenginegames.macosxjs.com" target="_blank" rel="noopener">unrealenginegames</a></td>
+                            <td><a href="https://chromeenginegames.macosxjs.com" target="_blank" rel="noopener">chromeenginegames</a></td>
+                            <td><a href="https://lithtechenginegames.macosxjs.com" target="_blank" rel="noopener">lithtechenginegames</a></td>
+                            <td><a href="https://renderwareenginegames.macosxjs.com" target="_blank" rel="noopener">renderwareenginegames</a></td>
+                            <td><a href="https://videogameslibrary.macosxjs.com" target="_blank" rel="noopener">Video Games Library</a></td>
+                            <td><a href="https://ue3.macosxjs.com/" target="_blank" rel="noopener">UE3</a></td>
+                        </tr>
+                    </tbody>
                 </table>
-                <div style="text-align: center; margin-top: 10px;">
-                    macosxjs.com
-                </div>
+                <div class="center" style="text-align:center; margin-top:10px;">macosxjs.com</div>
             </div>
-        </div>
-    </div>
+        </td>
+    </tr>
 
-    <!-- THE MASSIVE DROP DOWN -->
-    <div style="height: 60px; text-align: center; font-size: 30px;">
-        ↓
-    </div>
+    <tr>
+        <td colspan="2" class="down-arrow">↓</td>
+    </tr>
 
-    <!-- CORE PROJECT HUB WITH SPINE -->
-    <div class="main-spine">
-        <div class="spine-line"></div>
-        <div class="content-area">
-            
-            <div class="grid-row">
-                <div class="span-left" style="text-align: left;">
-                    <strong>igiteam - game remake project</strong><br><br>
-                    <div class="list-left">
-                        <a href="https://igi1.macosxjs.com" target="_blank">igi1.macosxjs.com</a><br>
-                        <a href="https://webassemblygames.macosxjs.com" target="_blank">webassemblygames.macosxjs.com</a><br>
-                        <a href="https://html.macosxjs.com" target="_blank">html.macosxjs.com</a><br>
-                        <a href="https://htmltoreadme.macosxjs.com" target="_blank">htmltoreadme.macosxjs.com</a><br>
-                        <a href="https://readme.macosxjs.com" target="_blank">readme.macosxjs.com</a><br>
-                        <a href="https://treegit.macosxjs.com" target="_blank">treegit.macosxjs.com</a><br>
-                        <a href="https://gitimages.macosxjs.com" target="_blank">gitimages.macosxjs.com</a><br>
-                        <a href="https://gitvideos.macosxjs.com" target="_blank">gitvideos.macosxjs.com</a><br>
-                        <br>
-                        → <a href="https://meyt.macosxjs.com" target="_blank">meyt.macosxjs.com</a><br>
-                        → <a href="https://ytembed.macosxjs.com" target="_blank">ytembed.macosxjs.com</a><br>
-                        → <a href="https://flipbook.macosxjs.com" target="_blank">flipbook.macosxjs.com</a>
-                    </div>
-                </div>
-                
-                <div class="span-right" style="text-align: left;">
-                    <strong>60 video games project</strong><br>
-                    → <a href="https://macosxjs.com" target="_blank">macosxjs.com</a><br><br>
-                    <div class="list-left">
-                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo1/index.html</a><br>
-                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo2</a><br>
-                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo3</a><br>
-                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo4</a><br>
-                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo5</a><br>
-                        <br>
-                        pdf / cbz
-                    </div>
-                </div>
-            </div>
+    <!-- CORE PROJECT HUB -->
+    <tr>
+        <td colspan="2" style="padding:0;">
+            <table class="section-table">
+                <tbody>
+                    <tr>
+                        <td class="left">
+                            <strong>igiteam - game remake project</strong>
+                            <br><br>
+                            <table class="list-table">
+                                <tbody>
+                                    <tr><td><a href="https://igi1.macosxjs.com" target="_blank" rel="noopener">igi1.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://webassemblygames.macosxjs.com" target="_blank" rel="noopener">webassemblygames.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://html.macosxjs.com" target="_blank" rel="noopener">html.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://htmltoreadme.macosxjs.com" target="_blank" rel="noopener">htmltoreadme.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://readme.macosxjs.com" target="_blank" rel="noopener">readme.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://treegit.macosxjs.com" target="_blank" rel="noopener">treegit.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://gitimages.macosxjs.com" target="_blank" rel="noopener">gitimages.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://gitvideos.macosxjs.com" target="_blank" rel="noopener">gitvideos.macosxjs.com</a></td></tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr><td>→ <a href="https://meyt.macosxjs.com" target="_blank" rel="noopener">meyt.macosxjs.com</a></td></tr>
+                                    <tr><td>→ <a href="https://ytembed.macosxjs.com" target="_blank" rel="noopener">ytembed.macosxjs.com</a></td></tr>
+                                    <tr><td>→ <a href="https://flipbook.macosxjs.com" target="_blank" rel="noopener">flipbook.macosxjs.com</a></td></tr>
+                                </tbody>
+                            </table>
+                        </td>
 
-            <hr>
+                        <td class="left">
+                            <strong>60 video games project</strong>
+                            <br>
+                            → <a href="https://macosxjs.com" target="_blank" rel="noopener">macosxjs.com</a>
+                            <br><br>
+                            <table class="list-table">
+                                <tbody>
+                                    <tr><td><a href="https://github.com/igiteam" target="_blank" rel="noopener">github.com/owner/repo1/index.html</a></td></tr>
+                                    <tr><td><a href="https://github.com/igiteam" target="_blank" rel="noopener">github.com/owner/repo2</a></td></tr>
+                                    <tr><td><a href="https://github.com/igiteam" target="_blank" rel="noopener">github.com/owner/repo3</a></td></tr>
+                                    <tr><td><a href="https://github.com/igiteam" target="_blank" rel="noopener">github.com/owner/repo4</a></td></tr>
+                                    <tr><td><a href="https://github.com/igiteam" target="_blank" rel="noopener">github.com/owner/repo5</a></td></tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr><td>pdf / cbz</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
 
-            <!-- BOTTOM LEFT: Utilities -->
-            <div class="grid-row">
-                <div class="span-left" style="text-align: left;">
-                    <div class="list-left">
-                        <a href="https://q3d.macosxjs.com" target="_blank">q3d.macosxjs.com</a><br>
-                        <a href="https://audioscript.macosxjs.com" target="_blank">audioscript.macosxjs.com</a><br>
-                        <a href="https://voiceclone.macosxjs.com" target="_blank">voiceclone.macosxjs.com</a><br>
-                        <a href="https://deepseek.macosxjs.com" target="_blank">deepseek.macosxjs.com</a><br>
-                        <a href="https://urlpixel.macosxjs.com" target="_blank">urlpixel.macosxjs.com</a><br>
-                        <a href="https://sdhd.macosxjs.com" target="_blank">sdhd.macosxjs.com</a><br>
-                        <a href="https://filmstrip.macosxjs.com" target="_blank">filmstrip.macosxjs.com</a><br>
-                        <a href="https://imagetosquare.macosxjs.com" target="_blank">imagetosquare.macosxjs.com</a><br>
-                        <a href="https://ragai.macosxjs.com" target="_blank">ragai.macosxjs.com</a><br>
-                        <a href="https://imagegen.macosxjs.com" target="_blank">imagegen.macosxjs.com</a><br>
-                        <a href="https://qr.macosxjs.com" target="_blank">qr.macosxjs.com</a><br>
-                        <br>
-                        <a href="https://remove.bg" target="_blank">remove.bg</a><br>
-                        <a href="https://pixlr.com" target="_blank">pixlr.com</a><br>
-                        <a href="https://firecrawl.dev/tools/website-to-markdown" target="_blank">firecrawl.dev/tools/website-to-markdown</a><br>
-                        <a href="https://crayon.com" target="_blank">crayon.com</a>
-                    </div>
-                </div>
+    <tr><td colspan="2"><hr class="separator"></td></tr>
 
-                <!-- BOTTOM RIGHT: Workflow Bracket -->
-                <div class="span-right" style="text-align: left;">
-                    <div style="text-align: right; margin-bottom: 10px;">
-                        ( 8xH200 deepseekV3 )<br>
-                        ( image / video / texture generation )<br>
-                        ( audio / cycle upscaler )
-                    </div>
-                    <div class="workflow-list">
-                        <div>nvidia texture tools</div>
-                        <div>photoshop 7.0 win (nvidia dds)</div>
-                        <div>bumpmap creator</div>
-                        <div>3dripper</div>
-                        <div>blender / 3dsmax / milkshape</div>
-                        <div>bink video</div>
-                    </div>
-                </div>
-            </div>
+    <!-- UTILITIES AND WORKFLOW -->
+    <tr>
+        <td colspan="2" style="padding:0;">
+            <table class="section-table">
+                <tbody>
+                    <tr>
+                        <td class="left">
+                            <table class="list-table">
+                                <tbody>
+                                    <tr><td><a href="https://q3d.macosxjs.com" target="_blank" rel="noopener">q3d.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://audioscript.macosxjs.com" target="_blank" rel="noopener">audioscript.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://voiceclone.macosxjs.com" target="_blank" rel="noopener">voiceclone.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://deepseek.macosxjs.com" target="_blank" rel="noopener">deepseek.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://urlpixel.macosxjs.com" target="_blank" rel="noopener">urlpixel.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://sdhd.macosxjs.com" target="_blank" rel="noopener">sdhd.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://filmstrip.macosxjs.com" target="_blank" rel="noopener">filmstrip.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://imagetosquare.macosxjs.com" target="_blank" rel="noopener">imagetosquare.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://ragai.macosxjs.com" target="_blank" rel="noopener">ragai.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://imagegen.macosxjs.com" target="_blank" rel="noopener">imagegen.macosxjs.com</a></td></tr>
+                                    <tr><td><a href="https://qr.macosxjs.com" target="_blank" rel="noopener">qr.macosxjs.com</a></td></tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr><td><a href="https://remove.bg" target="_blank" rel="noopener">remove.bg</a></td></tr>
+                                    <tr><td><a href="https://pixlr.com" target="_blank" rel="noopener">pixlr.com</a></td></tr>
+                                    <tr><td><a href="https://firecrawl.dev/tools/website-to-markdown" target="_blank" rel="noopener">firecrawl.dev/tools/website-to-markdown</a></td></tr>
+                                    <tr><td><a href="https://crayon.com" target="_blank" rel="noopener">crayon.com</a></td></tr>
+                                </tbody>
+                            </table>
+                        </td>
 
-        </div>
-    </div>
+                        <td class="left">
+                            <div class="right">
+                                ( 8xH200 deepseekV3 )<br>
+                                ( image / video / texture generation )<br>
+                                ( audio / cycle upscaler )
+                            </div>
+                            <table class="workflow">
+                                <tbody>
+                                    <tr><td>nvidia texture tools</td></tr>
+                                    <tr><td>photoshop 7.0 win (nvidia dds)</td></tr>
+                                    <tr><td>bumpmap creator</td></tr>
+                                    <tr><td>3dripper</td></tr>
+                                    <tr><td>blender / 3dsmax / milkshape</td></tr>
+                                    <tr><td>bink video</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
 
-    <hr>
-
-</div>
+</tbody>
+</table>
 
 </body>
 </html>

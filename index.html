@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGI Team - Architecture Map</title>
+<style>
+    /* Pure ink on paper. No styling, just structure. */
+    body {
+        font-family: monospace;
+        background-color: #ffffff;
+        color: #000000;
+        margin: 20px;
+        padding: 0;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+    
+    a {
+        color: #000000;
+        text-decoration: underline;
+    }
+
+    a:hover {
+        text-decoration: none;
+        background-color: #000;
+        color: #fff;
+    }
+
+    /* The layout grid */
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+    }
+
+    /* The left spine */
+    .main-spine {
+        display: flex;
+    }
+
+    .spine-line {
+        width: 40px;
+        border-left: 2px solid #000;
+        border-bottom: 2px solid #000;
+        border-bottom-left-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    
+    .spine-line::after {
+        content: "→";
+        position: absolute;
+        bottom: -12px;
+        left: -7px;
+        font-size: 16px;
+        background: #fff;
+    }
+
+    .content-area {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    /* Grid areas for alignment */
+    .grid-row {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .span-full { grid-column: 1 / -1; }
+    .span-center { grid-column: 2 / 6; }
+    .span-left { grid-column: 1 / 4; }
+    .span-right { grid-column: 4 / 7; }
+
+    /* Arrow styles */
+    .arrow-down {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .arrow-right {
+        text-align: right;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* The engine bracket */
+    .engine-bracket {
+        border-top: 2px solid #000;
+        border-left: 2px solid #000;
+        border-right: 2px solid #000;
+        padding: 10px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .engine-bracket::after {
+        content: "↓";
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Structural tables for text */
+    .pure-table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+
+    .pure-table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .list-left {
+        text-align: left;
+        display: inline-block;
+    }
+
+    /* Right side workflow brackets */
+    .workflow-list {
+        text-align: left;
+        border-left: 2px solid #000;
+        padding-left: 10px;
+        margin-left: 20px;
+        display: inline-block;
+    }
+
+    .workflow-list div {
+        position: relative;
+    }
+
+    .workflow-list div::before {
+        content: "—";
+        position: absolute;
+        left: -20px;
+        top: 0;
+    }
+
+    hr {
+        border: 0;
+        border-bottom: 1px dashed #000;
+        margin: 30px 0;
+    }
+
+    .header-note {
+        font-size: 12px;
+        text-decoration: underline;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- TOP SECTION: Sources & Platforms -->
+    <div class="grid-row">
+        <div class="span-left">
+            <a href="https://github.com/igiteam" target="_blank">github.com/igiteam</a>
+        </div>
+        <div class="span-right">
+            <a href="https://archive.org/details/igiteam_uploads" target="_blank">archive.org/details/igiteam_uploads</a>
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="span-full">
+            gamecube &nbsp;&nbsp;&nbsp; wii &nbsp;&nbsp;&nbsp; ps2 &nbsp;&nbsp;&nbsp; xbox &nbsp;&nbsp;&nbsp; ps1
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="span-center">
+            <a href="https://macosxjs.com" target="_blank">macosxjs.com</a>
+        </div>
+        <div class="span-right">
+            <a href="https://www.mobygames.com" target="_blank">mobygames.com</a>
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="span-center">
+            ↓
+        </div>
+        <div class="span-right">
+            ↓ pc
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="span-center">
+            <a href="https://xboxengines.macosxjs.com" target="_blank">xboxengines</a><br>
+            <a href="https://igiteam.github.io" target="_blank">igiteam.github.io</a>
+        </div>
+        <div class="span-right">
+            <a href="https://pcgamesengines.macosxjs.com" target="_blank">pcgamesengines</a>
+        </div>
+    </div>
+
+    <!-- MIDDLE SECTION: Engine Bracket -->
+    <div class="grid-row">
+        <div class="span-full">
+            <div class="engine-bracket">
+                <table class="pure-table">
+                    <tr>
+                        <td><a href="https://idtechengines.macosxjs.com" target="_blank">idtechengines</a></td>
+                        <td><a href="https://gamebryoenginegames.macosxjs.com" target="_blank">gamebryoenginegames</a></td>
+                        <td><a href="https://unrealenginegames.macosxjs.com" target="_blank">unrealenginegames</a></td>
+                        <td><a href="https://chromeenginegames.macosxjs.com" target="_blank">chromeenginegames</a></td>
+                    </tr>
+                </table>
+                <div style="text-align: center; margin-top: 10px;">
+                    macosxjs.com
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE MASSIVE DROP DOWN -->
+    <div style="height: 60px; text-align: center; font-size: 30px;">
+        ↓
+    </div>
+
+    <!-- CORE PROJECT HUB WITH SPINE -->
+    <div class="main-spine">
+        <div class="spine-line"></div>
+        <div class="content-area">
+            
+            <div class="grid-row">
+                <div class="span-left" style="text-align: left;">
+                    <strong>igiteam - game remake project</strong><br><br>
+                    <div class="list-left">
+                        <a href="https://igi1.macosxjs.com" target="_blank">igi1.macosxjs.com</a><br>
+                        <a href="https://webassemblygames.macosxjs.com" target="_blank">webassemblygames.macosxjs.com</a><br>
+                        <a href="https://html.macosxjs.com" target="_blank">html.macosxjs.com</a><br>
+                        <a href="https://readme.macosxjs.com" target="_blank">readme.macosxjs.com</a><br>
+                        <a href="https://treegit.macosxjs.com" target="_blank">treegit.macosxjs.com</a><br>
+                        <a href="https://gitimages.macosxjs.com" target="_blank">gitimages.macosxjs.com</a><br>
+                        <a href="https://gitvideos.macosxjs.com" target="_blank">gitvideos.macosxjs.com</a><br>
+                        <br>
+                        → <a href="https://meyt.macosxjs.com" target="_blank">meyt.macosxjs.com</a><br>
+                        → <a href="https://extended.macosxjs.com" target="_blank">extended.macosxjs.com</a><br>
+                        → <a href="https://flipbook.macosxjs.com" target="_blank">flipbook.macosxjs.com</a>
+                    </div>
+                </div>
+                
+                <div class="span-right" style="text-align: left;">
+                    <strong>60 video games project</strong><br>
+                    → <a href="https://macosxjs.com" target="_blank">macosxjs.com</a><br><br>
+                    <div class="list-left">
+                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo1/index.html</a><br>
+                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo2</a><br>
+                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo3</a><br>
+                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo4</a><br>
+                        <a href="https://github.com/igiteam" target="_blank">github.com/owner/repo5</a><br>
+                        <br>
+                        pdf / cbz
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- BOTTOM LEFT: Utilities -->
+            <div class="grid-row">
+                <div class="span-left" style="text-align: left;">
+                    <div class="list-left">
+                        <a href="https://goa.macosxjs.com" target="_blank">goa.macosxjs.com</a><br>
+                        <a href="https://audioscript.macosxjs.com" target="_blank">audioscript.macosxjs.com</a><br>
+                        <a href="https://voicedone.macosxjs.com" target="_blank">voicedone.macosxjs.com</a><br>
+                        <a href="https://deepseek.macosxjs.com" target="_blank">deepseek.macosxjs.com</a><br>
+                        <a href="https://wepixel.macosxjs.com" target="_blank">wepixel.macosxjs.com</a><br>
+                        <a href="https://sdsettings.macosxjs.com" target="_blank">sdsettings.macosxjs.com</a><br>
+                        <a href="https://filmstrip.macosxjs.com" target="_blank">filmstrip.macosxjs.com</a><br>
+                        <a href="https://imagestozipore.macosxjs.com" target="_blank">imagestozipore.macosxjs.com</a><br>
+                        <a href="https://pyx.macosxjs.com" target="_blank">pyx.macosxjs.com</a><br>
+                        <a href="https://firecrawl.dev" target="_blank">firecrawl.dev/bash/notebook</a><br>
+                        <a href="https://crayon.com" target="_blank">crayon.com</a><br>
+                        <a href="https://qr.macosxjs.com" target="_blank">qr.macosxjs.com</a>
+                    </div>
+                </div>
+
+                <!-- BOTTOM RIGHT: Workflow Bracket -->
+                <div class="span-right" style="text-align: left;">
+                    <div style="text-align: right; margin-bottom: 10px;">
+                        ( 8xH200 deepseekV3 )<br>
+                        ( image / video / texture generation )<br>
+                        ( audio / cycle upscaler )
+                    </div>
+                    <div class="workflow-list">
+                        <div>nvidia texture tools</div>
+                        <div>photoshop 7.0 win (nvidia dds)</div>
+                        <div>bumpmap creator</div>
+                        <div>3dripper</div>
+                        <div>blender / 3dsmax / milkshape</div>
+                        <div>bink video</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

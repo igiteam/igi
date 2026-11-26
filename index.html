@@ -159,18 +159,88 @@
         vertical-align: middle !important;
     }
 
-    @media (max-width: 700px) {\n        .console-table, .magazine-table { min-width: 1100px; }\n        .dashboard > tbody > tr > td { overflow-x: auto; }
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 700px) {
         body { margin: 10px; font-size: 12px; }
-        .dashboard, .dashboard tbody, .dashboard tr, .dashboard td {
+
+        .dashboard,
+        .dashboard tbody,
+        .dashboard tr,
+        .dashboard td {
             max-width: 100%;
         }
-        .console-table, .magazine-table, .engine-table { table-layout: auto; }
-        .console-table td, .magazine-table td, .engine-table td {
+
+        /* Wide link tables scroll horizontally instead of crushing text */
+        .console-table,
+        .magazine-table { min-width: 1100px; }
+
+        .dashboard > tbody > tr > td { overflow-x: auto; }
+
+        .console-table,
+        .magazine-table,
+        .engine-table { table-layout: auto; }
+
+        .console-table td,
+        .magazine-table td,
+        .engine-table td {
             padding: 4px 2px;
             overflow-wrap: anywhere;
         }
+
         .content-cell { padding-left: 8px !important; }
+
         .section-table > tbody > tr > td { padding: 6px; }
+
+        /* Stack the two side-by-side sections vertically */
+        .section-table,
+        .section-table > tbody,
+        .section-table > tbody > tr,
+        .section-table > tbody > tr > td {
+            display: block;
+            width: 100% !important;
+            max-width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* Don't let list cells shrink to 1-char width */
+        .list-table {
+            table-layout: auto;
+            width: 100%;
+        }
+
+        .list-table td {
+            overflow-wrap: break-word;
+            word-break: normal;
+            white-space: normal;
+        }
+
+        /* Keep the tree pipes narrow but stop them eating the row */
+        .list-table td:first-child {
+            width: 12px;
+            padding-right: 2px;
+        }
+
+        /* Workflow block: full width, no giant indent */
+        .workflow {
+            display: block;
+            margin-left: 10px;
+            padding-left: 10px;
+            width: auto;
+        }
+
+        .workflow td {
+            overflow-wrap: break-word;
+            padding-left: 18px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        body { font-size: 13px; }
+
+        .workflow td::before { content: ""; }
+        .workflow { padding-left: 4px; margin-left: 4px; }
+        .workflow td { padding-left: 0; }
     }
 </style>
 </head>
